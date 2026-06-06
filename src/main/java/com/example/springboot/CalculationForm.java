@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 public class CalculationForm {
 
-
+    
     private Integer firstNumber;
     private Integer secondNumber;
 }
