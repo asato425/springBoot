@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>計算フォーム</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <h1>数字を入力してください</h1>
@@ -10,15 +15,13 @@
 <form th:action="@{/calculate}" th:object="${calculationForm}" method="post">
     <div>
         <label for="firstNumber">1つ目の数字:</label>
-        <input type="number" id="firstNumber" th:field="*{firstNumber}" required>
-        <br>
-        <span th:if="${#fields.hasErrors('firstNumber')}" th:errors="*{firstNumber}"></span>
+        <input type="number" id="firstNumber" th:field="*{firstNumber}">
+        <span class="error" th:if="${#fields.hasErrors('firstNumber')}" th:errors="*{firstNumber}"></span>
     </div>
     <div>
         <label for="secondNumber">2つ目の数字:</label>
-        <input type="number" id="secondNumber" th:field="*{secondNumber}" required>
-        <br>
-        <span th:if="${#fields.hasErrors('secondNumber')}" th:errors="*{secondNumber}"></span>
+        <input type="number" id="secondNumber" th:field="*{secondNumber}">
+        <span class="error" th:if="${#fields.hasErrors('secondNumber')}" th:errors="*{secondNumber}"></span>
     </div>
     <div>
         <button type="submit">計算</button>
