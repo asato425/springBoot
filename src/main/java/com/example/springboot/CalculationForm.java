@@ -12,4 +12,6 @@ public class CalculationForm {
     private Integer firstNumber;
     @NotNull(message = "Second number is required")
     private Integer secondNumber;
+
+    private Integer result;
 }

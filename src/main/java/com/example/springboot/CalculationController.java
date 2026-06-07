@@ -37,24 +37,16 @@ public class CalculationController {
             return mv;
         }
 
-        int firstNumber = calculationForm.getFirstNumber();
-        int secondNumber = calculationForm.getSecondNumber();
-        int result = calculationService.add(firstNumber, secondNumber);
-        redirectAttributes.addAttribute("firstNumber", firstNumber);
-        redirectAttributes.addAttribute("secondNumber", secondNumber);
-        redirectAttributes.addAttribute("result", result);
+        calculationForm.setResult(calculationService.add(calculationForm.getFirstNumber(), calculationForm.getSecondNumber()));
+        redirectAttributes.addFlashAttribute("calculationForm", calculationForm);
         mv.setViewName("redirect:/result");
         return mv;
     }
 
     @GetMapping("/result")
     public ModelAndView showResult(ModelAndView mv,
-            @RequestParam("firstNumber") int firstNumber,
-            @RequestParam("secondNumber") int secondNumber,
-            @RequestParam("result") int result) {
-        mv.addObject("firstNumber", firstNumber);
-        mv.addObject("secondNumber", secondNumber);
-        mv.addObject("result", result);
+            @RequestParam("calculationForm") CalculationForm calculationForm) {
+        mv.addObject("calculationForm", calculationForm);
         mv.setViewName("result");
         return mv;
     }
