@@ -34,24 +34,22 @@ public class CalculationController {
             RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
+            mv.addObject("calculationForm", new CalculationForm());
             mv.setViewName("index");
             return mv;
         }
         // ログで受け取った値を確認
-        log.info("calculate() - firstNumber={}, secondNumber={}", calculationForm.getFirstNumber(), calculationForm.getSecondNumber());
-        calculationForm.setResult(calculationService.add(calculationForm.getFirstNumber(), calculationForm.getSecondNumber()));
+        log.info("calculate() - firstNumber={}, secondNumber={}", calculationForm.getFirstNumber(),
+                calculationForm.getSecondNumber());
+        calculationForm
+                .setResult(calculationService.add(calculationForm.getFirstNumber(), calculationForm.getSecondNumber()));
         log.info("calculate() - result={}", calculationForm.getResult());
         redirectAttributes.addFlashAttribute("calculationForm", calculationForm);
         mv.setViewName("redirect:/result");
         return mv;
     }
-
     @GetMapping("/result")
-    public ModelAndView showResult(ModelAndView mv,
-            @ModelAttribute("calculationForm") CalculationForm calculationForm
-            ) {
-        log.info("showResult() - calculationForm: first={}, second={}, result={}", calculationForm.getFirstNumber(), calculationForm.getSecondNumber(), calculationForm.getResult());
-        // mv.addObject("calculationForm", calculationForm);
+    public ModelAndView showResult(ModelAndView mv) {
         mv.setViewName("result");
         return mv;
     }
